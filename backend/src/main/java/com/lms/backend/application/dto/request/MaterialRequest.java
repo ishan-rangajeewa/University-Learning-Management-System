@@ -1,4 +1,9 @@
 package com.lms.backend.application.dto.request;
 
-public record MaterialRequest() {
+import jakarta.validation.constraints.NotBlank;
+
+public record MaterialRequest(
+        @NotBlank(message = "Title is required")
+        String title
+) {
 }

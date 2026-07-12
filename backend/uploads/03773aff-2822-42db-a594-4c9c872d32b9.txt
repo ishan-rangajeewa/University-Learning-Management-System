@@ -1,0 +1,44 @@
+CV review request
+
+act as a expert recruiter and hiring manager who reviews 200+ resumes weekly.
+
+I will provide you with my current CV and a target job description. Please perform a hyper-critical CV review broken into the following 4 section
+
+1. ATS score and compatibility 
+
+1.1Rete my CV from 1 to 100 on how well it matches the target job
+
+1.2list exactly which keywords and skills are missing
+
+
+
+2.Strength and weaknesses
+
+2.1. what are the best part of my CV for this role?
+
+2.2. what sections need immediate rewriting?
+
+
+
+3.Bullet point Optimization
+
+3.1.Review my work experience bullets
+
+3.2.are they achievement based(quantifiable) or just duty based?
+
+3.3.Rewrite 3 bullet points using strong action verbs and measurable impact
+
+
+
+4.Red flags
+
+4.1.Identify any gaps, confusing language, or formatting issues that would cause a recruiter to reject this cv
+
+
+
+Here is the Job Description:
+
+
+
+Attached my cv
+

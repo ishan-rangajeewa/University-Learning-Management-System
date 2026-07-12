@@ -1,4 +1,27 @@
+// application/dto/response/UserResponse.java
 package com.lms.backend.application.dto.response;
 
-public record UserResponse() {
+import com.lms.backend.domain.enums.Role;
+import com.lms.backend.domain.model.User;
+
+import java.time.LocalDateTime;
+
+public record UserResponse(
+        String id,
+        String username,
+        String email,
+        Role role,
+        boolean active,
+        LocalDateTime createdAt
+) {
+    public static UserResponse from(User user) {
+        return new UserResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRole(),
+                user.isActive(),
+                user.getCreatedAt()
+        );
+    }
 }
