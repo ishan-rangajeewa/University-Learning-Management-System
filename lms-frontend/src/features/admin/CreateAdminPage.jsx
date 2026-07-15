@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useCreateAdminMutation } from './adminApi'
+import { useRegisterMutation } from '../auth/authApi'
 
 function CreateAdminPage() {
-  const [formData, setFormData] = useState({ username: '', email: '', password: '' })
+  const [formData, setFormData] = useState({ username: '', firstname:'', lastname:'', email: '', password: '', role: 'ROLE_ADMIN' })
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
 
@@ -19,14 +20,14 @@ function CreateAdminPage() {
     try {
       await createAdmin(formData).unwrap()
       setSuccess(true)
-      setFormData({ username: '', email: '', password: '' })
+      setFormData({username: '', firstname:'', lastname:'', email: '', password: '', role: 'ROLE_ADMIN' })
     } catch (err) {
       setError(err?.data?.message || 'Failed to create admin account.')
     }
   }
 
   return (
-    <div className="max-w-sm">
+    <div className="m-12 max-w-sm ">
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">Create Admin Account</h1>
 
       {success && (
@@ -41,6 +42,29 @@ function CreateAdminPage() {
       )}
 
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg border border-gray-200">
+        <label className="block mb-4">
+          <span className="text-sm font-medium text-gray-700">First Name</span>
+          <input
+            type="text"
+            name="firstname"
+            value={formData.firstname}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
+        <label className="block mb-4">
+          <span className="text-sm font-medium text-gray-700">Last Name</span>
+          <input
+            type="text"
+            name="lastname"
+            value={formData.lastname}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
+
         <label className="block mb-4">
           <span className="text-sm font-medium text-gray-700">Username</span>
           <input

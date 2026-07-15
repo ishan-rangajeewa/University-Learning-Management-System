@@ -3,10 +3,13 @@ package com.lms.backend.application.dto.response;
 
 import com.lms.backend.domain.enums.Role;
 
+
 public record AuthResponse(
         String token,
         String userId,
         String username,
+        String firstname,
+        String lastname,
         Role role
 ) {
 }

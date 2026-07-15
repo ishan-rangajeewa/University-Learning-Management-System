@@ -33,6 +33,8 @@ public class AuthService {
 
         User user = User.builder()
                 .username(request.username())
+                .firstname(request.firstname())
+                .lastname(request.lastname())
                 .email(request.email())
                 .password(passwordEncoder.encode(request.password()))
                 .role(request.role())
@@ -42,7 +44,7 @@ public class AuthService {
         UserPrincipal principal = new UserPrincipal(savedUser);
         String token = jwtService.generateToken(principal);
 
-        return new AuthResponse(token, savedUser.getId(), savedUser.getUsername(), savedUser.getRole());
+        return new AuthResponse(token, savedUser.getId(), savedUser.getUsername(),savedUser.getFirstname(),savedUser.getLastname(), savedUser.getRole());
     }
 
     public AuthResponse login(LoginRequest request) {
@@ -59,6 +61,6 @@ public class AuthService {
         UserPrincipal principal = new UserPrincipal(user);
         String token = jwtService.generateToken(principal);
 
-        return new AuthResponse(token, user.getId(), user.getUsername(), user.getRole());
+        return new AuthResponse(token, user.getId(), user.getUsername(),user.getFirstname(),user.getLastname(), user.getRole());
     }
 }

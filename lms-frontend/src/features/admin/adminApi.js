@@ -31,7 +31,7 @@ export const adminApi = apiSlice.injectEndpoints({
 
     createAdmin: builder.mutation({
       query: (adminData) => ({
-        url: '/admin/admins',
+        url: '/auth/register',
         method: 'POST',
         body: adminData, // { username, email, password }
       }),

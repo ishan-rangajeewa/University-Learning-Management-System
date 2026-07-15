@@ -20,6 +20,12 @@ public class User {
     @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
     private String id;
 
+    @Column(nullable = false, length = 50)
+    private String firstname;
+
+    @Column(nullable = false, length = 50)
+    private String lastname;
+
     @Column(nullable = false, unique = true, length = 50)
     private String username;
 

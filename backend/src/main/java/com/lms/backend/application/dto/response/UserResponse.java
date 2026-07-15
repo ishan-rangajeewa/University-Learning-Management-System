@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 
 public record UserResponse(
         String id,
+        String firstName,
+        String lastName,
         String username,
         String email,
         Role role,
@@ -17,6 +19,8 @@ public record UserResponse(
     public static UserResponse from(User user) {
         return new UserResponse(
                 user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
                 user.getUsername(),
                 user.getEmail(),
                 user.getRole(),

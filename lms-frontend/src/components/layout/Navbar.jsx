@@ -22,7 +22,7 @@ function Navbar() {
         {user?.role === 'ROLE_ADMIN' && (
           <div className="flex items-center gap-4">
             <Link to="/admin/pending-lecturers" className="text-sm text-gray-600 hover:text-blue-600">
-              Pending Lecturers
+              Create Lecturers
             </Link>
             <Link to="/admin/create-admin" className="text-sm text-gray-600 hover:text-blue-600">
               Create Admin
@@ -33,7 +33,7 @@ function Navbar() {
 
       <div className="flex items-center gap-4">
         <span className="text-sm text-gray-600">
-          {user?.username} <span className="text-gray-400">({user?.role?.replace('ROLE_', '')})</span>
+          {user?.fistname} <span className="text-gray-400">({user?.role?.replace('ROLE_', '')})</span>
         </span>
         <button
           onClick={handleLogout}

@@ -6,11 +6,14 @@ import { setCredentials } from './authSlice'
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
+    fistname: '',
+    lastname: '',
     username: '',
     email: '',
     password: '',
     role: 'ROLE_STUDENT',
   })
+  const [created,setCreated] = useState('')
   const [error, setError] = useState('')
 
   const [register, { isLoading }] = useRegisterMutation()
@@ -28,6 +31,7 @@ function RegisterPage() {
     try {
       const response = await register(formData).unwrap()
       dispatch(setCredentials(response))
+      setCreated("Account Created")
       navigate('/login')
     } catch (err) {
       setError(err?.data?.message || 'Registration failed. Please try again.')
@@ -44,6 +48,35 @@ function RegisterPage() {
             {error}
           </p>
         )}
+        {created && (
+          <p className='mb-4 text-sm text-green-600 bg-green-50 border border-green-200 rounded px-3 py-2'>
+            {created}
+          </p>
+        )}
+
+        <label className='block md-4'>
+          <span className='text-sm font-medium text-gray-700'>Fist Name</span>
+          <input 
+            type='text'
+            name='fistname'
+            value={formData.fistname}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
+
+        <label className='block mb-4'>
+          <span className='text-sm font-medium text-gray-700'>Last Name</span>
+          <input
+            type='text'
+            name='lastname'
+            value={formData.lastname}
+            onChange={handleChange}
+            required
+            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </label>
 
         <label className="block mb-4">
           <span className="text-sm font-medium text-gray-700">Username</span>
@@ -53,8 +86,6 @@ function RegisterPage() {
             value={formData.username}
             onChange={handleChange}
             required
-            minLength={3}
-            maxLength={15}
             className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </label>
@@ -67,12 +98,11 @@ function RegisterPage() {
             value={formData.email}
             onChange={handleChange}
             required
-            maxLength={50}
             className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </label>
 
-        <label className="block mb-4">
+        <label className="block mb-6">
           <span className="text-sm font-medium text-gray-700">Password</span>
           <input
             type="password"
@@ -81,22 +111,8 @@ function RegisterPage() {
             onChange={handleChange}
             required
             minLength={6}
-            maxLength={50}
             className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-        </label>
-
-        <label className="block mb-6">
-          <span className="text-sm font-medium text-gray-700">I am a</span>
-          <select
-            name="role"
-            value={formData.role}
-            onChange={handleChange}
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="ROLE_STUDENT">Student</option>
-            {/* <option value="ROLE_LECTURER">Lecturer</option> */}
-          </select>
         </label>
 
         <button
@@ -117,5 +133,4 @@ function RegisterPage() {
     </div>
   )
 }
-
 export default RegisterPage
