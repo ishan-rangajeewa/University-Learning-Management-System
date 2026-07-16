@@ -28,7 +28,7 @@ function PendingLecturersPage() {
   return (
     <>
       <div className="max-w-sm">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">Create Admin Account</h1>
+      <h1 className="text-2xl font-semibold text-gray-800 mb-6">Create Lecturer Account</h1>
 
       {success && (
         <p className="mb-4 text-sm text-green-700 bg-green-50 border border-green-200 rounded px-3 py-2">

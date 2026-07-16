@@ -13,21 +13,6 @@ export const adminApi = apiSlice.injectEndpoints({
           : [{ type: 'PendingLecturer', id: 'LIST' }],
     }),
 
-    approveLecturer: builder.mutation({
-      query: (id) => ({
-        url: `/admin/lecturers/${id}/approve`,
-        method: 'POST',
-      }),
-      invalidatesTags: [{ type: 'PendingLecturer', id: 'LIST' }],
-    }),
-
-    rejectLecturer: builder.mutation({
-      query: (id) => ({
-        url: `/admin/lecturers/${id}/reject`,
-        method: 'POST',
-      }),
-      invalidatesTags: [{ type: 'PendingLecturer', id: 'LIST' }],
-    }),
 
     createAdmin: builder.mutation({
       query: (adminData) => ({
@@ -42,6 +27,5 @@ export const adminApi = apiSlice.injectEndpoints({
 export const {
   useGetPendingLecturersQuery,
   useApproveLecturerMutation,
-  useRejectLecturerMutation,
   useCreateAdminMutation,
 } = adminApi

@@ -1,0 +1,35 @@
+Default applications
+Java: Fix MS SystemUser Bug:                                   	End!
+Java: Remove old Installation:                                   	End!
+Java Runtime Environment 8 Update 251:               	End!
+Java Runtime Environment 8 Update 251 x64:        	End!
+Visual C++ 2005 Uninstall:                                         	End!
+Visual C++ 2005:                                                         	End!
+Visual C++ 2005 x64:                                                  	End!
+Visual C++ 2008 Uninstall:                                         	End!
+Visual C++ 2008:                                                         	End!
+Visual C++ 2008 x64:                                                  	End!
+Visual C++ 2010 Uninstall:                                         	End!
+Visual C++ 2010:                                                         	End!
+Visual C++ 2010 x64:                                                  	End!
+Visual C++ 2012 Uninstall:                                         	End!
+Visual C++ 2012 Minimum:                                      	End!
+Visual C++ 2012 Additional:                                      	End!
+Visual C++ 2012 Minimum x64:                               	End!
+Visual C++ 2012 Additional x64:                               	End!
+Visual C++ 2013 Uninstall:                                         	End!
+Visual C++ 2013:                                                         	End!
+Visual C++ 2013 x64:                                                  	End!
+Visual C++ 2019 Uninstall:                                         	End!
+Visual C++ 2019:                                                         	End!
+Visual C++ 2019 x64:                                                  	End!
+
+Other Runtimes
+Microsoft Visual J-Sharp 2.0 SE:                                	End!
+
+Default applications
+Microsoft Silverlight v5.1.50918.0 x64:                     	End!
+
+System Runtimes
+Allgemeine Runtime Dateien:                                   	End!
+Microsoft DirectX 9.0c Redistributable:                   	End!

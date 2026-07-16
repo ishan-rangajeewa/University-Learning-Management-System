@@ -6,7 +6,7 @@ import { setCredentials } from './authSlice'
 
 function RegisterPage() {
   const [formData, setFormData] = useState({
-    fistname: '',
+    firstname: '',
     lastname: '',
     username: '',
     email: '',
@@ -58,8 +58,8 @@ function RegisterPage() {
           <span className='text-sm font-medium text-gray-700'>Fist Name</span>
           <input 
             type='text'
-            name='fistname'
-            value={formData.fistname}
+            name='firstname'
+            value={formData.firstname}
             onChange={handleChange}
             required
             className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"

@@ -15,10 +15,16 @@ import AssignmentCreatePage from '../features/assignments/AssignmentCreatePage'
 import AssignmentEditPage from '../features/assignments/AssignmentEditPage'
 import PendingLecturersPage from '../features/admin/PendingLecturersPage'
 import CreateAdminPage from '../features/admin/CreateAdminPage'
+import ManageEnrollmentPage from '../features/enrollments/ManageEnrollmentPage'
+// import Home from '../'
 
 function AppRoutes() {
   return (
     <Routes>
+      {/* <Route path='/enrollments/manage' element={<ManageEnrollmentPage />}/> */}
+      <Route element={<ProtectedRoute allowedRoles={['ROLE_ADMIN', 'ROLE_LECTURER']} />}>
+            <Route path="/enrollments/manage" element={<ManageEnrollmentPage />} />
+      </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/register-lecturer" element={<RegisterLecturerPage />} />

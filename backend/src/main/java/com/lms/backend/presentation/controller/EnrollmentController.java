@@ -1,9 +1,11 @@
 // EnrollmentController.java
 package com.lms.backend.presentation.controller;
 
+import com.lms.backend.application.dto.request.BulkEnrollRequest;
 import com.lms.backend.application.dto.response.EnrollmentResponse;
 import com.lms.backend.application.service.EnrollmentService;
 import com.lms.backend.infrastructure.security.UserPrincipal;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +47,37 @@ public class EnrollmentController {
     }
 
     @GetMapping("/api/courses/{courseId}/enrollments")
-    @PreAuthorize("hasRole('LECTURER')")
+    @PreAuthorize("hasAnyRole('LECTURER', 'ADMIN')")
     public ResponseEntity<List<EnrollmentResponse>> getCourseEnrollments(@PathVariable String courseId) {
         return ResponseEntity.ok(enrollmentService.getCourseEnrollments(courseId));
     }
+
+    @PostMapping("/api/courses/{courseId}/enroll/{studentId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'LECTURER')")
+    public ResponseEntity<EnrollmentResponse> enrollStudent(
+            @PathVariable String courseId,
+            @PathVariable String studentId) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(enrollmentService.enroll(courseId, studentId));
+    }
+
+    @PostMapping("/api/courses/{courseId}/enrollments")
+    @PreAuthorize("hasAnyRole('ADMIN', 'LECTURER')")
+    public ResponseEntity<List<EnrollmentResponse>> enrollStudents(
+            @PathVariable String courseId,
+            @Valid @RequestBody BulkEnrollRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(enrollmentService.enrollStudents(courseId, request.studentIds()));
+    }
+
+    @DeleteMapping("/api/courses/{courseId}/enrollments/{studentId}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'LECTURER')")
+    public ResponseEntity<Void> unenrollStudent(
+            @PathVariable String courseId,
+            @PathVariable String studentId) {
+        enrollmentService.unenrollStudent(courseId, studentId);
+        return ResponseEntity.noContent().build();
+    }
+
+
 }

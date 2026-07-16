@@ -2,15 +2,24 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '../auth/authSlice'
 import { useGetCoursesQuery, useGetMyCoursesQuery } from './coursesApi'
+import { useGetMyEnrollmentsQuery } from '../enrollments/enrollmentsApi'
 
 function DashboardPage() {
   const user = useSelector(selectCurrentUser)
   const isLecturer = user?.role === 'ROLE_LECTURER'
+  const isStudent = user?.role === 'ROLE_STUDENT'
 
   const allCoursesResult = useGetCoursesQuery(undefined, { skip: isLecturer })
   const myCoursesResult = useGetMyCoursesQuery(undefined, { skip: !isLecturer })
+  const { data: myEnrollments } = useGetMyEnrollmentsQuery(undefined, { skip: !isStudent })
 
-  const { data: courses, isLoading, isError } = isLecturer ? myCoursesResult : allCoursesResult
+  const { data: allCourses, isLoading, isError } = isLecturer ? myCoursesResult : allCoursesResult
+
+  // For students: only the courses they're actually enrolled in (join against enrollments)
+  const enrolledCourseIds = new Set((myEnrollments ?? []).map((e) => e.courseId))
+  const courses = isStudent
+    ? (allCourses ?? []).filter((c) => enrolledCourseIds.has(c.id))
+    : allCourses
 
   return (
     <div>
@@ -18,22 +27,24 @@ function DashboardPage() {
         Welcome, {user?.firstname}
       </h1>
       <p className="text-sm text-gray-500 mb-6">
-        {isLecturer ? 'Here is an overview of the courses you teach.' : 'Here is an overview of your courses.'}
+        {isLecturer ? 'Here is an overview of the courses you teach.' : 'Here is an overview of your enrolled courses.'}
       </p>
 
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-lg font-semibold text-gray-800">
-          {isLecturer ? 'My Courses' : 'Enrolled / Available Courses'}
+          {isLecturer ? 'My Courses' : 'My Enrolled Courses'}
         </h2>
         <Link to="/courses" className="text-sm text-blue-600 hover:underline">
-          View all courses
+          {isStudent ? 'Browse all courses' : 'View all courses'}
         </Link>
       </div>
 
       {isLoading && <p className="text-gray-500">Loading courses...</p>}
       {isError && <p className="text-red-600">Failed to load courses.</p>}
       {courses && courses.length === 0 && (
-        <p className="text-gray-500">No courses to show yet.</p>
+        <p className="text-gray-500">
+          {isStudent ? "You're not enrolled in any courses yet." : 'No courses to show yet.'}
+        </p>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,6 +1,8 @@
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '../auth/authSlice'
 import { useGetCourseEnrollmentsQuery } from './enrollmentsApi'
+import Navbar from '../../components/layout/Navbar'
+
 
 function EnrolledStudentsList({ courseId }) {
   const user = useSelector(selectCurrentUser)
@@ -11,6 +13,8 @@ function EnrolledStudentsList({ courseId }) {
   if (user?.role !== 'ROLE_LECTURER') return null
 
   return (
+    <>
+    <Navbar/>
     <div className="mt-6">
       <h2 className="text-lg font-semibold text-gray-800 mb-3">Enrolled Students</h2>
 
@@ -28,6 +32,7 @@ function EnrolledStudentsList({ courseId }) {
         ))}
       </ul>
     </div>
+    </>
   )
 }
 

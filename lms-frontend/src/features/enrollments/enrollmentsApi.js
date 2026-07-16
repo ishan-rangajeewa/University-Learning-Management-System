@@ -39,6 +39,29 @@ export const enrollmentsApi = apiSlice.injectEndpoints({
         { type: 'Enrollment', id: `COURSE-${courseId}` },
       ],
     }),
+
+    bulkEnroll: builder.mutation({
+      query: ({ courseId, studentIds }) => ({
+        url: `/courses/${courseId}/enrollments`,
+        method: 'POST',
+        body: { studentIds },
+      }),
+      invalidatesTags: (result, error, { courseId }) => [
+        { type: 'Enrollment', id: 'LIST' },
+        { type: 'Enrollment', id: `COURSE-${courseId}` },
+      ],
+    }),
+
+    adminUnenroll: builder.mutation({
+      query: ({ courseId, studentId }) => ({
+        url: `/courses/${courseId}/enrollments/${studentId}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (result, error, { courseId }) => [
+        { type: 'Enrollment', id: 'LIST' },
+        { type: 'Enrollment', id: `COURSE-${courseId}` },
+      ],
+    }),
   }),
 })
 
@@ -47,4 +70,6 @@ export const {
   useGetCourseEnrollmentsQuery,
   useEnrollMutation,
   useUnenrollMutation,
+  useBulkEnrollMutation,
+  useAdminUnenrollMutation,
 } = enrollmentsApi

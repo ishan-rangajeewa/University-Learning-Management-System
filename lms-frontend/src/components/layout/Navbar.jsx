@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout, selectCurrentUser } from '../../features/auth/authSlice'
+import { apiSlice } from '../../services/apiSlice'
 
 function Navbar() {
   const user = useSelector(selectCurrentUser)
@@ -9,6 +10,7 @@ function Navbar() {
 
   const handleLogout = () => {
     dispatch(logout())
+    dispatch(apiSlice.util.resetApiState())
     navigate('/login')
   }
 
@@ -29,6 +31,13 @@ function Navbar() {
             </Link>
           </div>
         )}
+        {(user?.role === 'ROLE_ADMIN' || user?.role === 'ROLE_LECTURER') && (
+          <Link to="/enrollments/manage" className="text-sm text-gray-600 hover:text-blue-600">
+            Enroll Student
+          </Link>
+        )}
+        {/* /enroll-student */}
+        
       </div>
 
       <div className="flex items-center gap-4">

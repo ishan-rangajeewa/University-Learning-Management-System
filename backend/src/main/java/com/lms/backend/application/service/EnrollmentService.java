@@ -63,4 +63,34 @@ public class EnrollmentService {
                 .orElseThrow(() -> new ResourceNotFoundException("Enrollment not found for this course"));
         enrollmentRepository.delete(enrollment);
     }
+    @Transactional
+    public List<EnrollmentResponse> enrollStudents(String courseId, List<String> studentIds) {
+        Course course = courseRepository.findById(courseId)
+                .orElseThrow(() -> ResourceNotFoundException.of("Course", courseId));
+
+        List<EnrollmentResponse> results = new java.util.ArrayList<>();
+
+        for (String studentId : studentIds) {
+            if (enrollmentRepository.existsByStudentIdAndCourseId(studentId, courseId)) {
+                continue; // skip students already enrolled instead of failing the whole batch
+            }
+            User student = userRepository.findById(studentId)
+                    .orElseThrow(() -> ResourceNotFoundException.of("User", studentId));
+
+            Enrollment enrollment = Enrollment.builder()
+                    .course(course)
+                    .student(student)
+                    .build();
+
+            results.add(EnrollmentResponse.from(enrollmentRepository.save(enrollment)));
+        }
+        return results;
+    }
+
+    @Transactional
+    public void unenrollStudent(String courseId, String studentId) {
+        Enrollment enrollment = enrollmentRepository.findByStudentIdAndCourseId(studentId, courseId)
+                .orElseThrow(() -> new ResourceNotFoundException("Enrollment not found for this course"));
+        enrollmentRepository.delete(enrollment);
+    }
 }
