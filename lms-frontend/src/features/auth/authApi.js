@@ -16,7 +16,34 @@ export const authApi = apiSlice.injectEndpoints({
         body: credentials, // { username, password }
       }),
     }),
+    changePassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/change-password',
+        method: 'PUT',
+        body,
+      }),
+    }),
+    forgotPassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/forgot-password',
+        method: 'POST',
+        body, // { email }
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (body) => ({
+        url: '/auth/reset-password',
+        method: 'POST',
+        body, // { email, otp, newPassword }
+      }),
+    }),
   }),
 })
 
-export const { useRegisterMutation, useLoginMutation } = authApi
+export const {
+  useRegisterMutation,
+  useLoginMutation,
+  useChangePasswordMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+} = authApi

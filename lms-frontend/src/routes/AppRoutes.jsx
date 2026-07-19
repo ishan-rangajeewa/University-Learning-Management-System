@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
+import HomePage from '../features/home/HomePage'
 import ProtectedRoute from '../components/common/ProtectedRoute'
 import DashboardLayout from '../components/layout/DashboardLayout'
 import UnauthorizedPage from '../components/common/UnauthorizedPage'
@@ -16,6 +17,9 @@ import AssignmentEditPage from '../features/assignments/AssignmentEditPage'
 import PendingLecturersPage from '../features/admin/PendingLecturersPage'
 import CreateAdminPage from '../features/admin/CreateAdminPage'
 import ManageEnrollmentPage from '../features/enrollments/ManageEnrollmentPage'
+import ChangePasswordPage from '../features/auth/ChangePasswordPage'
+import ForgotPasswordPage from '../features/auth/ForgotPasswordPage'  
+
 // import Home from '../'
 
 function AppRoutes() {
@@ -27,8 +31,8 @@ function AppRoutes() {
       </Route>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
-      <Route path="/register-lecturer" element={<RegisterLecturerPage />} />
       <Route path="/unauthorized" element={<UnauthorizedPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       {/* Any authenticated user */}
       <Route element={<ProtectedRoute />}>
@@ -37,6 +41,8 @@ function AppRoutes() {
           <Route path="/courses" element={<CourseListPage />} />
           <Route path="/courses/:id" element={<CourseDetailPage />} />
           <Route path="/assignments/:id" element={<AssignmentDetailPage />} />
+          <Route path="/change-password" element={<ChangePasswordPage/>}/>
+
 
           {/* Student only */}
           <Route element={<ProtectedRoute allowedRoles={['ROLE_STUDENT']} />}>
@@ -52,13 +58,14 @@ function AppRoutes() {
 
           {/* Admin only */}
           <Route element={<ProtectedRoute allowedRoles={['ROLE_ADMIN']} />}>
-            <Route path="/admin/pending-lecturers" element={<PendingLecturersPage />} />
+            {/* <Route path="/admin/pending-lecturers" element={<PendingLecturersPage />} /> */}
             <Route path="/admin/create-admin" element={<CreateAdminPage />} />
+            <Route path="/register-lecturer" element={<RegisterLecturerPage />} />
           </Route>
         </Route>
       </Route>
 
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   )

@@ -13,7 +13,7 @@ function RegisterPage() {
     password: '',
     role: 'ROLE_STUDENT',
   })
-  const [created,setCreated] = useState('')
+  const [created, setCreated] = useState('')
   const [error, setError] = useState('')
 
   const [register, { isLoading }] = useRegisterMutation()
@@ -39,98 +39,103 @@ function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-2xl font-semibold mb-6 text-gray-800">Create an account</h1>
-
-        {error && (
-          <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
-            {error}
-          </p>
-        )}
-        {created && (
-          <p className='mb-4 text-sm text-green-600 bg-green-50 border border-green-200 rounded px-3 py-2'>
-            {created}
-          </p>
-        )}
-
-        <label className='block md-4'>
-          <span className='text-sm font-medium text-gray-700'>Fist Name</span>
-          <input 
-            type='text'
-            name='firstname'
-            value={formData.firstname}
-            onChange={handleChange}
-            required
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <label className='block mb-4'>
-          <span className='text-sm font-medium text-gray-700'>Last Name</span>
-          <input
-            type='text'
-            name='lastname'
-            value={formData.lastname}
-            onChange={handleChange}
-            required
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <label className="block mb-4">
-          <span className="text-sm font-medium text-gray-700">Username</span>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <label className="block mb-4">
-          <span className="text-sm font-medium text-gray-700">Email</span>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <label className="block mb-6">
-          <span className="text-sm font-medium text-gray-700">Password</span>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength={6}
-            className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </label>
-
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="w-full bg-blue-600 text-white font-medium py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {isLoading ? 'Creating account...' : 'Register'}
-        </button>
-
-        <p className="mt-4 text-sm text-center text-gray-600">
-          Already have an account?{' '}
-          <Link to="/login" className="text-blue-600 hover:underline">
-            Log in
-          </Link>
-        </p>
-      </form>
+    <>
+    <div className='flex items-center justify-between px-6 sm:px-10 py-4 border-b border-gray-200'>
+      <Link to='/' className='text-lg font-semibold text-gray-800' >LMS</Link>
     </div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <form onSubmit={handleSubmit} className="w-full max-w-sm bg-white p-8 rounded-lg shadow-md">
+          <h1 className="text-2xl font-semibold mb-6 text-gray-800">Create an account</h1>
+
+          {error && (
+            <p className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded px-3 py-2">
+              {error}
+            </p>
+          )}
+          {created && (
+            <p className='mb-4 text-sm text-green-600 bg-green-50 border border-green-200 rounded px-3 py-2'>
+              {created}
+            </p>
+          )}
+
+          <label className='block md-4'>
+            <span className='text-sm font-medium text-gray-700'>Fist Name</span>
+            <input
+              type='text'
+              name='firstname'
+              value={formData.firstname}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+
+          <label className='block mb-4'>
+            <span className='text-sm font-medium text-gray-700'>Last Name</span>
+            <input
+              type='text'
+              name='lastname'
+              value={formData.lastname}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+
+          <label className="block mb-4">
+            <span className="text-sm font-medium text-gray-700">Username</span>
+            <input
+              type="text"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+
+          <label className="block mb-4">
+            <span className="text-sm font-medium text-gray-700">Email</span>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+
+          <label className="block mb-6">
+            <span className="text-sm font-medium text-gray-700">Password</span>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              minLength={6}
+              className="mt-1 w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </label>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full bg-blue-600 text-white font-medium py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          >
+            {isLoading ? 'Creating account...' : 'Register'}
+          </button>
+
+          <p className="mt-4 text-sm text-center text-gray-600">
+            Already have an account?{' '}
+            <Link to="/login" className="text-blue-600 hover:underline">
+              Log in
+            </Link>
+          </p>
+        </form>
+      </div>
+    </>
   )
 }
 export default RegisterPage

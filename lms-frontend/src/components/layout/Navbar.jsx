@@ -11,7 +11,7 @@ function Navbar() {
   const handleLogout = () => {
     dispatch(logout())
     dispatch(apiSlice.util.resetApiState())
-    navigate('/login')
+    navigate('/')
   }
 
   return (
@@ -22,7 +22,7 @@ function Navbar() {
         </Link>
 
         {user?.role === 'ROLE_ADMIN' && (
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <Link to="/admin/pending-lecturers" className="text-sm text-gray-600 hover:text-blue-600">
               Create Lecturers
             </Link>
@@ -32,15 +32,20 @@ function Navbar() {
           </div>
         )}
         {(user?.role === 'ROLE_ADMIN' || user?.role === 'ROLE_LECTURER') && (
-          <Link to="/enrollments/manage" className="text-sm text-gray-600 hover:text-blue-600">
-            Enroll Student
-          </Link>
+          <div className='flex items-center gap-6'>
+            <Link to="/enrollments/manage" className="text-sm text-gray-600 hover:text-blue-600">
+              Enroll Student
+            </Link>
+          </div>
         )}
-        {/* /enroll-student */}
-        
+
+
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-6">
+        <Link to="/change-password" className='text-sm text-gray-600 hover:text-blue-600'>
+          Change Password
+        </Link>
         <span className="text-sm text-gray-600">
           {user?.fistname} <span className="text-gray-400">({user?.role?.replace('ROLE_', '')})</span>
         </span>
